@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#101a2d" />
+    <meta name="description" content="Verified structured extraction for invoices and resumes." />
+    <title>structuralAI — verified extraction</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/static/style.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <aside class="rail">
+        <div class="brand-mark" aria-label="structuralAI home"><span class="mark-bracket">[</span><span class="mark-core">SA</span><span class="mark-bracket">]</span></div>
+        <div class="brand-lockup"><span class="eyebrow">STRUCTURED INTELLIGENCE</span><strong>structuralAI</strong></div>
+        <div class="rail-rule"></div>
+        <div class="rail-intro">
+          <span class="eyebrow">WORKSPACE 01</span>
+          <h1>Messy text.<br /><em>Inspectable</em> evidence.</h1>
+          <p>Extract only what the source supports, then verify the shape before you trust the result.</p>
+        </div>
+        <div class="pipeline" aria-label="Extraction pipeline">
+          <div class="pipeline-step active"><span class="step-number">01</span><span><b>Compose</b><small>Choose a document</small></span><i></i></div>
+          <div class="pipeline-step"><span class="step-number">02</span><span><b>Extract</b><small>Run the selected model</small></span><i></i></div>
+          <div class="pipeline-step"><span class="step-number">03</span><span><b>Verify</b><small>Pass the strict schema</small></span><i></i></div>
+        </div>
+        <div class="rail-footer"><span class="status-dot"></span><span>Private by design</span><span class="footer-divider"></span><span>v1.0</span></div>
+      </aside>
+
+      <section class="workspace">
+        <header class="topbar">
+          <div><span class="eyebrow">STRUCTURAL-AI</span><p>Turn unstructured source into a clean, typed record.</p></div>
+          <div class="header-datetime">
+  <div id="current-date">Loading date...</div>
+  <div id="current-time">--:--:--</div>
+  <span>IST · India</span>
+</div>
+
+        </header>
+
+        <div class="content-grid">
+          <section class="compose-card card">
+            <div class="card-header">
+              <div><span class="section-index">01 / INPUT</span><h2>What are we reading?</h2></div>
+              <span class="limit-label" id="charCount">0 / 12,000</span>
+            </div>
+
+            <div class="type-switch" role="tablist" aria-label="Document type">
+              <button class="type-option active" data-type="invoice" role="tab" aria-selected="true"><span class="option-icon">⌁</span><span><b>Invoice</b><small>Amounts, dates, line items</small></span></button>
+              <button class="type-option" data-type="resume" role="tab" aria-selected="false"><span class="option-icon">◎</span><span><b>Resume</b><small>Profile, experience, skills</small></span></button>
+            </div>
+
+            <label class="field-label" for="sourceText"><span>DOCUMENT TEXT</span><span class="required-label">Required</span></label>
+            <textarea id="sourceText" maxlength="12000" placeholder="Paste the raw invoice text here…\n\nTip: Include the whole document. The extractor will use null when a field is not supported by the source."></textarea>
+            <div class="textarea-footer"><span id="inputHint">Invoice schema active · strict fields</span><span>12k character limit</span></div>
+
+            <label class="field-label" for="guidance"><span>OPTIONAL GUIDANCE</span><span>Preferences only</span></label>
+            <input id="guidance" maxlength="1000" placeholder="e.g. Keep currency values as numbers; preserve source date format" />
+
+            <div class="controls-row">
+             <div class="provider-control">
+  <span class="field-label inline-label">GEMINI MODEL</span>
+  <select id="provider">
+    <option value="gemini">Gemini 3.5 Flash-lite — Primary</option>
+    <option value="gemini_fallback">Gemini 3.1 flash-lite — Fallback</option>
+  </select>
+</div>
+              <button id="extractButton" class="primary-button"><span>Run extraction</span><span class="button-arrow">↗</span></button>
+            </div>
+            <div class="form-note"><span class="shield-icon">◇</span><span>Your API key stays on the server. Inputs are screened before any provider call.</span></div>
+          </section>
+
+          <section class="result-card card" aria-live="polite">
+            <div class="card-header result-header">
+              <div><span class="section-index">02 / OUTPUT</span><h2 id="resultTitle">Awaiting a document</h2></div>
+              <span class="result-status idle" id="resultStatus"><span class="status-dot"></span>Not run</span>
+            </div>
+            <div id="emptyState" class="empty-state"><div class="empty-glyph">{ }</div><h3>Verified output will land here.</h3><p>Choose a document type, paste its text, then run the pipeline. No conclusion is final until the schema passes.</p><div class="empty-rule"></div><span>OUTPUT IS NEVER SHOWN AS VERIFIED BY DEFAULT</span></div>
+            <div id="loadingState" class="loading-state hidden"><div class="loader-ring"></div><div><b>Running the verification pipeline</b><p>Calling the provider, parsing JSON, checking every field…</p></div></div>
+            <div id="errorState" class="error-state hidden"><div class="error-symbol">!</div><div><span class="section-index">PIPELINE STOPPED</span><h3 id="errorTitle">The result could not be verified.</h3><p id="errorMessage"></p><button id="retryButton" class="text-button">Review input <span>↗</span></button></div></div>
+            <div id="successState" class="success-state hidden">
+              <div class="verified-banner"><div class="verified-icon">✓</div><div><b>Verified against strict schema</b><p id="verificationNote">Structural checks passed. Review source context before making a decision.</p></div></div>
+              <div id="fieldList" class="field-list"></div>
+              <details class="json-details"><summary><span>View validated JSON</span><span class="summary-arrow">⌄</span></summary><pre id="jsonOutput"></pre></details>
+              <div class="result-meta"><span id="resultMeta"></span><span id="requestId"></span></div>
+            </div>
+          </section>
+        </div>
+          
+        </section>
+        <footer class="page-footer"><span>STRUCTURALAI / VERIFIED EXTRACTION</span><span>POWERED BY GOOGLE GEMINI</span><span>NO UNVERIFIED CONCLUSIONS</span></footer>
+      </section>
+    </main>
+    <script src="/static/app.js" defer></script>
+  </body>
+</html>

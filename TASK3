@@ -1,0 +1,3 @@
+Detailed Problem Statement 
+Implement a LangChain or function-calling agent equipped with tools: real-time web search (DuckDuckGo/Tavily), a Python math calculator, and local file reader.
+

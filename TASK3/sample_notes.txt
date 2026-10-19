@@ -1,0 +1,7 @@
+Project notes
+=============
+Q1 leads: 42
+Q2 leads: 58
+Q3 leads: 71
+
+Question: What is the total number of leads?

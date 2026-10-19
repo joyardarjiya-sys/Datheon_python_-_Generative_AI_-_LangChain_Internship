@@ -1,0 +1,31 @@
+PROJECT: AUTONOMOUS AI RESEARCH AGENT
+
+Purpose:
+Build an AI agent that can solve multi-step problems
+using web search, mathematical calculations, and local files.
+
+TOOLS:
+1. DuckDuckGo Search
+2. Python Calculator
+3. Local File Reader
+
+EXAMPLE BUSINESS DATA:
+Initial investment: 50000
+Monthly revenue: 18000
+Monthly operating cost: 8000
+Project duration: 12 months
+
+CALCULATIONS:
+Monthly profit = Monthly revenue - Monthly operating cost
+
+Total profit = Monthly profit * Project duration
+
+Return on investment percentage =
+(Total profit / Initial investment) * 100
+
+TECHNOLOGY STACK:
+Python, LangChain, Gemini, DuckDuckGo, Docker
+
+PROJECT GOAL:
+Create a console-based AI agent that autonomously
+chooses and invokes tools to solve compound queries.

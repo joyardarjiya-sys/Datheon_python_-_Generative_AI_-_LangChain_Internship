@@ -1,0 +1,16 @@
+Artificial Intelligence
+
+Artificial Intelligence is a field of computer science
+focused on building systems that perform tasks requiring
+human-like intelligence.
+
+Machine Learning allows systems to learn patterns from data.
+
+Deep Learning uses multi-layer neural networks to learn
+complex representations.
+
+Large Language Models are trained to understand and
+generate natural language.
+
+AI agents can use tools, observe results, and take
+multiple steps to accomplish a goal.
